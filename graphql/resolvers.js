@@ -1,4 +1,5 @@
 const User = require('../models/user')
+const Observation = require('../models/observation')
 
 const resolvers = {
   
@@ -10,6 +11,16 @@ const resolvers = {
         }
 
         return resolve(users);
+      })
+    }),
+    
+    getObservations: () => new Promise((resolve, rejeft) => {
+      Observation.find((err, observations) => {
+        if (err) {
+          return reject(err);
+        }
+
+        return resolve(observations);
       })
     })
   },
@@ -26,6 +37,19 @@ const resolvers = {
         }
 
         return resolve(user);
+      })
+    }),
+
+    createObservation: (root, props) => new Promise((resolve, reject) => {
+
+      const observation = new Observation(props);
+
+      observation.save((err, observation) => {
+        if (err) {
+          return reject(err);
+        }
+
+        return resolve(observation);
       })
     })
   }
