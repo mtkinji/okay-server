@@ -13,8 +13,18 @@ const resolvers = {
         return resolve(users);
       })
     }),
-    
-    getObservations: () => new Promise((resolve, rejeft) => {
+
+    getUser: (parent, {id}) => new Promise((resolve, reject) => {
+      User.findById(id, (err, user) => {
+        if (err) {
+          return reject(err);
+        }
+
+        return resolve(user);
+      })
+    }),
+
+    getObservations: () => new Promise((resolve, reject) => {
       Observation.find((err, observations) => {
         if (err) {
           return reject(err);
@@ -22,7 +32,18 @@ const resolvers = {
 
         return resolve(observations);
       })
-    })
+    }),
+
+    getObservation: (parent, {id}) => new Promise((resolve, reject) => {
+      Observation.findById(id, (err, observation) => {
+        if (err) {
+          return reject(err);
+        }
+
+        return resolve(observation);
+      })
+    }),
+
   },
 
   Mutation: {

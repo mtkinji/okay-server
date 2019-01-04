@@ -3,7 +3,9 @@ const { gql } = require('apollo-server-express')
 const typeDefs = gql`
   type Query {
     getUsers: [User]
-    getObservations: [Observation]
+    getUser(id: ID!): User
+    getObservations(ownerId: ID, fileType: String, researchMethod: String, experienceVector: String, emotions: [String], frequency: String, magnitude: String, props: [String], journey: String, involvedParties: [String] ): [Observation]
+    getObservation(id: ID!): Observation
   }
 
   type Mutation {
